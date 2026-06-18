@@ -97,7 +97,7 @@ langBtn.onclick = () => {
 
 };
 
-const t = new Date("August 3, 2026 17:00").getTime();
+const t = new Date("August 3, 2026 19:00").getTime();
 
 setInterval(() => {
 
