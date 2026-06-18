@@ -36,83 +36,96 @@ intro.onclick = () => {
   langBtn.style.display = "block";
 };
 
-function fadeInMusic() {
+function fadeInMusic(){
   music.volume = 0;
-  music.play().catch(() => {});
+  music.play().catch(()=>{});
+
   let v = 0;
 
   let i = setInterval(() => {
-    if (v < 1) {
+    if(v < 1){
       v += 0.05;
       music.volume = v;
-    } else {
+    }else{
       clearInterval(i);
     }
-  }, 100);
+  },100);
 }
 
-function fadeOutMusic() {
+function fadeOutMusic(){
   let v = music.volume;
 
   let i = setInterval(() => {
-    if (v > 0) {
+    if(v > 0){
       v -= 0.05;
       music.volume = v;
-    } else {
+    }else{
       music.pause();
       clearInterval(i);
     }
-  }, 100);
+  },100);
 }
 
 btn.onclick = () => {
-  if (music.paused) {
+  if(music.paused){
     fadeInMusic();
     btn.innerHTML = "🔊";
-  } else {
+  }else{
     fadeOutMusic();
     btn.innerHTML = "🔇";
   }
 };
 
 langBtn.onclick = () => {
+
   currentLang = currentLang === "en" ? "ar" : "en";
 
   document.documentElement.lang = currentLang;
 
   document.querySelectorAll("[data-en]").forEach(el => {
+
     el.classList.add("fade");
 
     setTimeout(() => {
       el.innerHTML = el.getAttribute("data-" + currentLang);
       el.classList.remove("fade");
-    }, 150);
+    },150);
+
   });
 
   langBtn.textContent = currentLang === "en" ? "AR" : "EN";
+
 };
 
-const t = new Date("August 1, 2026 17:00").getTime();
+const t = new Date("August 3, 2026 17:00").getTime();
 
 setInterval(() => {
+
   let d = t - Date.now();
 
   upd("days", d / 864e5);
-  upd("hours", (d / 36e5) % 24);
-  upd("minutes", (d / 6e4) % 60);
-  upd("seconds", (d / 1e3) % 60);
-}, 1000);
+  upd("hours", d / 36e5 % 24);
+  upd("minutes", d / 6e4 % 60);
+  upd("seconds", d / 1e3 % 60);
 
-function upd(id, v) {
+},1000);
+
+function upd(id,v){
+
   let e = document.getElementById(id);
+
   v = Math.floor(v);
+
   e.textContent = v;
+
 }
 
-document.addEventListener("click", (e) => {
+document.addEventListener("click",(e)=>{
+
   let h = document.createElement("div");
 
   h.className = "heart";
+
   h.innerHTML = "❤️";
 
   h.style.left = e.clientX + "px";
@@ -120,5 +133,6 @@ document.addEventListener("click", (e) => {
 
   document.body.appendChild(h);
 
-  setTimeout(() => h.remove(), 1000);
+  setTimeout(() => h.remove(),1000);
+
 });
